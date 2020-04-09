@@ -30,3 +30,14 @@ def middle_node(head):
         arr.append(curr)
         curr = curr.next
     return arr[int(len(arr) / 2)]
+
+# def middle_node(self, head: ListNode) -> ListNode:
+#     mid = head
+#     last = head
+#     while last is not None:
+#         last = last.next
+#         if last is None:
+#             return mid
+#         last = last.next
+#         mid = mid.next
+#     return mid
