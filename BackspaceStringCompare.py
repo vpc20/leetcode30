@@ -29,6 +29,9 @@
 #
 # Follow up:
 #     Can you solve it in O(N) time and O(1) space?
+#
+# Note: In python, strings are immutable so you have to introduce another string when removing the applying
+# backspace
 
 # import re
 #
@@ -66,41 +69,21 @@ def apply_backspace(s):
             stack.pop()
     return ''.join(stack)
 
-# not working
-# def apply_backspace(s):
-#     s = s.lstrip('#')
-#     i = 0
-#     j = -1
-#     while i < len(s):
-#         if s[i] != '#':
-#             if i == len(s) - 1:
-#                 j += 1
-#                 s[j] = s[i]
-#             elif s[i + 1] == '#':
-#                 i += 1
-#             elif s[i + 1] != '#':
-#                 j += 1
-#                 s[j] += s[i]
-#         else:
-#             j -= 2
-#         i += 1
-#     return s
-
 
 def backspace_compare(s, t):
     return apply_backspace(s) == apply_backspace(t)
 
 
-print(backspace_compare('ab#c', 'ad#c'))
+# print(backspace_compare('ab#c', 'ad#c'))
 
 print(apply_backspace('ab#c'))
-print(apply_backspace('ad#c'))
-
-print(apply_backspace('ab##'))
-print(apply_backspace('c#d#'))
-
-print(apply_backspace('a##c'))
-print(apply_backspace('#a#c'))
-
-print(apply_backspace('a#c'))
-print(apply_backspace('b'))
+# print(apply_backspace('ad#c'))
+#
+# print(apply_backspace('ab##'))
+# print(apply_backspace('c#d#'))
+#
+# print(apply_backspace('a##c'))
+# print(apply_backspace('#a#c'))
+#
+# print(apply_backspace('a#c'))
+# print(apply_backspace('b'))
