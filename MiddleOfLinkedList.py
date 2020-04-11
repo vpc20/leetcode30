@@ -41,3 +41,16 @@ def middle_node(head):
 #         last = last.next
 #         mid = mid.next
 #     return mid
+
+# def middleNode(self, head):
+#     slow = fast = head
+#     while fast and fast.next:
+#         slow = slow.next
+#         fast = fast.next.next
+#     return slow
+
+# def middleNode(self, head):
+#     A = [head]
+#     while A[-1].next:
+#         A.append(A[-1].next)
+#     return A[len(A) / 2]
