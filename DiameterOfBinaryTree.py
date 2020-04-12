@@ -35,8 +35,7 @@ class TreeNode:
     def height(node):
         """
         The height of a node in a tree is the number of edges on the longest simple
-        downward path from the node to a leaf, and the height of a tree is the
-        height of its root.
+        downward path from the node to a leaf. The height of a tree is the height of its root.
 
         :param node: node of the tree
         :return: height of the node
@@ -72,18 +71,28 @@ class TreeNode:
         traverse(node)
         return max(harr)
 
-    # def diameterOfBinaryTree(self, root):
-    #     self.ans = 1
-    #
-    #     def depth(node):
-    #         if not node: return 0
-    #         L = depth(node.left)
-    #         R = depth(node.right)
-    #         self.ans = max(self.ans, L + R + 1)
-    #         return max(L, R) + 1
-    #
-    #     depth(root)
-    #     return self.ans - 1
+    def heightx(self, node):
+        left = 0
+        right = 0
+        if node.left:
+            left = 1 + self.heightx(node.left)
+        if node.right:
+            right = 1 + self.heightx(node.right)
+        return max(left, right)
+
+
+# def diameterOfBinaryTree(self, root):
+#     self.ans = 1
+#
+#     def depth(node):
+#         if not node: return 0
+#         L = depth(node.left)
+#         R = depth(node.right)
+#         self.ans = max(self.ans, L + R + 1)
+#         return max(L, R) + 1
+#
+#     depth(root)
+#     return self.ans - 1
 
 if __name__ == '__main__':
     node1 = TreeNode(1)
@@ -98,10 +107,10 @@ if __name__ == '__main__':
     node2.left = node4
     node2.right = node5
 
-    # print(node1.height(node1))
-    # print(node1.height(node2))
-    # print(node1.height(node3))
-    # print(node1.height(node4))
-    # print(node1.height(node5))
+    # print(node1.diameter(node1))
 
-    print(node1.diameter(node1))
+    print(node1.heightx(node1))
+    print(node1.heightx(node2))
+    print(node1.heightx(node3))
+    print(node1.heightx(node4))
+    print(node1.heightx(node5))
