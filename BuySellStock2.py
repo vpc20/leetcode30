@@ -41,14 +41,6 @@
 
 
 # def max_profit(prices):
-#     profit = 0
-#     for i in range(1, len(prices)):
-#         if prices[i] > prices[i - 1]:
-#             profit += prices[i] - prices[i - 1]
-#     return profit
-
-
-# def max_profit(prices):
 #     return sum([prices[i + 1] - prices[i] for i in range(len(prices) - 1) if prices[i] < prices[i + 1]])
 
 # def max_profit(prices):  # dynamic programming
@@ -66,6 +58,16 @@ def max_profit(prices):  # dynamic programming simplified, optimizing space
         if prices[i] > prices[i - 1]:
             profit = max(profit, profit + prices[i] - prices[i - 1])
     return profit
+
+# even more simplification, just accumulate profit since max will always be profit += prices[i] - prices[i - 1]
+# def max_profit(prices):
+#     profit = 0
+#     for i in range(1, len(prices)):
+#         if prices[i] > prices[i - 1]:
+#             profit += prices[i] - prices[i - 1]
+#     return profit
+
+
 
 prices = [397, 6621, 4997, 7506, 8918, 1662, 9187, 3278, 3890, 514, 18, 9305, 93, 5508, 3031, 2692, 6019, 1134, 1691,
           4949, 5071, 799, 8953, 7882, 4273, 302, 6753, 4657, 8368, 3942, 1982, 5117, 563, 3332, 2623, 9482, 4994, 8163,
