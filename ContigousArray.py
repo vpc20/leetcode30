@@ -44,12 +44,15 @@ def find_max_len(nums):
     hashmap = {0: -1}
     maxlen = 0
     count = 0
+    print(hashmap)
     for i in range(len(nums)):
         count += (1 if nums[i] == 1 else -1)
         if count in hashmap:
             maxlen = max(maxlen, i - hashmap[count])
+            print('maxlen', maxlen)
         else:
             hashmap[count] = i
+        print(i, hashmap)
     return maxlen
 
 
@@ -60,7 +63,8 @@ def find_max_len(nums):
 # nums = [1, 1, 1, 1, 1, 1, 1, 1, 0]
 # nums = [0, 1, 1, 1, 1, 1, 1, 1, 1]
 # nums = [1, 0, 1, 0]
-nums = [1, 1, 1, 1]
+# nums = [1, 1, 1, 1]
+nums = [0, 0, 1, 0, 0, 0, 1, 1]
 
 print(find_max_len_brute(nums))
 print(find_max_len(nums))
