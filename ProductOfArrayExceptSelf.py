@@ -44,6 +44,9 @@ def productExceptSelf(nums):
     pref = [nums[0]]  # prefix product
     for i in range(1, len(nums)):
         pref.append(nums[i] * pref[-1])
+    # pref = nums.copy()  # prefix product
+    # for i in range(1, len(pref)):
+    #     pref[i] *= pref[i - 1]
     return [int(pref[-1] / nums[i]) for i in range(len(nums))]
 
 
