@@ -60,6 +60,7 @@
 #         i += 1
 #     return result
 
+
 def apply_backspace(s):
     stack = []
     for i in range(len(s)):

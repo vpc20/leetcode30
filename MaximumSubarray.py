@@ -27,7 +27,7 @@ def max_subarr_sum(arr):
     return maxsum
 
 
-def max_subarr_sum_pref(arr): # solution using prefix sum
+def max_subarr_sum_pref(arr):  # solution using prefix sum
     if not arr:
         return 0
     for i in range(1, len(arr)):  # convert arr to prefix sum array

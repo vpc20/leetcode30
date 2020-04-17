@@ -24,7 +24,7 @@
 from itertools import combinations_with_replacement
 
 
-def checkValidString(s):
+def check_valid_string(s):
     if set(s) == {'*'}:
         return True
 
@@ -79,20 +79,20 @@ def valid_paren(s):
 #     return not stack
 
 
-print(checkValidString('*'))
-print(checkValidString('**'))
-print(checkValidString('()'))
-print(checkValidString('(())'))
-print(checkValidString('()()'))
+print(check_valid_string('*'))
+print(check_valid_string('**'))
+print(check_valid_string('()'))
+print(check_valid_string('(())'))
+print(check_valid_string('()()'))
 
-print(checkValidString('*)()'))
-print(checkValidString('(*()'))
-print(checkValidString('()*)'))
-print(checkValidString('()(*'))
+print(check_valid_string('*)()'))
+print(check_valid_string('(*()'))
+print(check_valid_string('()*)'))
+print(check_valid_string('()(*'))
 
-print(checkValidString('()**'))
-print(checkValidString('**()'))
-print(checkValidString('(***'))
-print(checkValidString('***)'))
+print(check_valid_string('()**'))
+print(check_valid_string('**()'))
+print(check_valid_string('(***'))
+print(check_valid_string('***)'))
 
-print(checkValidString('(*)'))
+print(check_valid_string('(*)'))

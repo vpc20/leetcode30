@@ -34,7 +34,7 @@
 #     0 <= shift[i][1] <= 100
 
 
-def stringShift(s, shift):
+def string_shift(s, shift):
     shf_dict = {0: 0, 1: 0}
     for shf in shift:
         shf_dict[shf[0]] += shf[1]
@@ -42,7 +42,7 @@ def stringShift(s, shift):
     return s[i:] + s[:i]
 
 
-print(stringShift('abc', [[0,1],[1,2]]))
-print(stringShift('abcdefg', [[1, 1], [1, 1], [0, 2], [1, 3]]))
+print(string_shift('abc', [[0, 1], [1, 2]]))
+print(string_shift('abcdefg', [[1, 1], [1, 1], [0, 2], [1, 3]]))
 
 # print(rotate('abc', 4))

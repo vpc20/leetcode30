@@ -12,6 +12,7 @@
 #
 # Note: The length of the given binary array will not exceed 50,000.
 
+
 def find_max_len_brute(nums):
     maxlen = 0
     for i in range(len(nums) - 1):
@@ -78,6 +79,8 @@ def find_max_len(nums):
 # nums = [1, 0, 1, 0]
 # nums = [1, 1, 1, 1]
 # nums = [0, 0, 1, 0, 0, 0, 1, 1]
+
+
 nums = [1, 0, 0, 1, 0]
 
 print(find_max_len_brute(nums))

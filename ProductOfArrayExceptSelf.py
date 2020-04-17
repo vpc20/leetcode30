@@ -16,7 +16,7 @@
 # of space complexity analysis.)
 
 
-def productExceptSelf_naive(nums):
+def product_except_self_naive(nums):
     output = []
     for i in range(len(nums)):
         prod = 1
@@ -50,24 +50,24 @@ def productExceptSelf_naive(nums):
 #     return [int(pref[-1] / nums[i]) for i in range(len(nums))]
 
 
-def productExceptSelf(nums):
-    pref = nums.copy()  # prefix product
-    for i in range(1, len(pref)):
-        pref[i] *= pref[i - 1]
-
-    suff = nums.copy()  # suffix product
-    for i in range(-2, -len(suff) - 1, -1):
-        suff[i] *= suff[i + 1]
-
-    result = []
-    for i in range(len(nums)):
-        if i == 0:
-            result.append(suff[i + 1])
-        elif i == len(nums) - 1:
-            result.append(pref[i - 1])
-        else:
-            result.append(pref[i - 1] * suff[i + 1])
-    return result
+# def productExceptSelf(nums):
+#     pref = nums.copy()  # prefix product
+#     for i in range(1, len(pref)):
+#         pref[i] *= pref[i - 1]
+#
+#     suff = nums.copy()  # suffix product
+#     for i in range(-2, -len(suff) - 1, -1):
+#         suff[i] *= suff[i + 1]
+#
+#     result = []
+#     for i in range(len(nums)):
+#         if i == 0:
+#             result.append(suff[i + 1])
+#         elif i == len(nums) - 1:
+#             result.append(pref[i - 1])
+#         else:
+#             result.append(pref[i - 1] * suff[i + 1])
+#     return result
 
 
 # def productExceptSelf(nums):
@@ -88,15 +88,15 @@ def productExceptSelf(nums):
 #     return result
 
 
-# def productExceptSelf(nums):
-#     pref = [1] + [0] * (len(nums) - 1)  # prefix product
-#     suff = [0] * (len(nums) - 1) + [1]  # suffix product
-#
-#     for i in range(1, len(nums)):
-#         pref[i] = nums[i - 1] * pref[i - 1]
-#         suff[-i - 1] = nums[-i] * suff[-i]
-#
-#     return [pref[i] * suff[i] for i in range(len(nums))]
+def product_except_self(nums):
+    pref = [1] * len(nums)  # prefix product
+    suff = [1] * len(nums)  # suffix product
+
+    for i in range(1, len(nums)):
+        pref[i] = nums[i - 1] * pref[i - 1]
+        suff[-i - 1] = nums[-i] * suff[-i]
+
+    return [pref[i] * suff[i] for i in range(len(nums))]
 
 
 # nums = [1, 2, 3, 4]
@@ -107,8 +107,8 @@ def productExceptSelf(nums):
 # nums = [9, 0, -2]
 nums = [1, 2, 3, 4, 5]
 print('input', nums)
-print('correct', productExceptSelf_naive(nums))
-print(productExceptSelf(nums))
+print('correct', product_except_self_naive(nums))
+print(product_except_self(nums))
 
 #   1     2     3     4     5
 

@@ -15,13 +15,14 @@
 # minStack.top();      --> Returns 0.
 # minStack.getMin();   --> Returns -2.
 
+
 class MinStack:
     def __init__(self):
         self.stack = []
 
     def push(self, x: int) -> None:
         if self.stack:
-            self.stack.append((x, min(x, self.getMin())))
+            self.stack.append((x, min(x, self.get_min())))
         else:
             self.stack.append((x, x))
 
@@ -32,7 +33,7 @@ class MinStack:
     def top(self) -> int:
         return self.stack[-1][0]
 
-    def getMin(self) -> int:
+    def get_min(self) -> int:
         return self.stack[-1][1]
 
 
@@ -68,7 +69,7 @@ minStack.push(-2)
 minStack.push(0)
 minStack.push(-3)
 print(minStack.stack)
-print(minStack.getMin())  # returns -3
+print(minStack.get_min())  # returns -3
 minStack.pop()
 print(minStack.top())  # returns 0
-print(minStack.getMin())  # returns -2
+print(minStack.get_min())  # returns -2

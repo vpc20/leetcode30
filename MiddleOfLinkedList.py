@@ -23,6 +23,7 @@
 #         self.val = x
 #         self.next = None
 
+
 def middle_node(head):
     curr = head
     arr = []
