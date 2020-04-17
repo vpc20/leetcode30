@@ -24,38 +24,51 @@
 from itertools import combinations_with_replacement
 
 
-def check_valid_string(s):
-    if set(s) == {'*'}:
-        return True
+# def check_valid_string(s):
+#     if set(s) == {'*'}:
+#         return True
+#
+#     if '*' in s:
+#         r = s.count('*')
+#         for comb in combinations_with_replacement(['', '(', ')'], r):
+#             new_str = ''
+#             j = -1
+#             for c in s:
+#                 if c == '*':
+#                     j += 1
+#                     new_str += comb[j]
+#                 else:
+#                     new_str += c
+#             if valid_paren(new_str):
+#                 return True
+#     else:
+#         return valid_paren(s)
 
-    if '*' in s:
-        r = s.count('*')
-        for comb in combinations_with_replacement(['', '(', ')'], r):
-            new_str = ''
-            j = -1
-            for c in s:
-                if c == '*':
-                    j += 1
-                    new_str += comb[j]
-                else:
-                    new_str += c
-            if valid_paren(new_str):
-                return True
-    else:
-        return valid_paren(s)
+
+# def valid_paren(s):
+#     stack = []
+#     for c in s:
+#         if c == '(':
+#             stack.append(c)
+#         elif c == ')':
+#             if not stack or stack[-1] != '(':
+#                 return False
+#             else:
+#                 stack.pop()
+#     return len(stack) == 0
 
 
-def valid_paren(s):
-    stack = []
-    for c in s:
-        if c == '(':
-            stack.append(c)
-        elif c == ')':
-            if not stack or stack[-1] != '(':
-                return False
-            else:
-                stack.pop()
-    return len(stack) == 0
+# def valid_paren(s):
+#     stack = 0
+#     for c in s:
+#         if c == '(':
+#             stack += 1
+#         elif c == ')':
+#             if stack == 0:
+#                 return False
+#             else:
+#                 stack -= 1
+#     return stack == 0
 
 
 # def checkValidString(s):
@@ -77,6 +90,27 @@ def valid_paren(s):
 #         if stack.pop() > star_stack.pop():
 #             return False
 #     return not stack
+
+def check_valid_string(s):
+    stack = 0
+    for c in s:
+        if c == '(' or c == '*':
+            stack += 1
+        else:
+            if stack == 0:
+                return False
+            else:
+                stack -= 1
+    stack = 0
+    for c in reversed(s):
+        if c == ')' or c == '*':
+            stack += 1
+        else:
+            if stack == 0:
+                return False
+            else:
+                stack -= 1
+    return True
 
 
 print(check_valid_string('*'))
