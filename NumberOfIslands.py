@@ -37,6 +37,15 @@ def update_island(grid, row, col):
         update_island(grid, row - 1, col)
 
 
+# def update_island(grid, row, col):
+#     grid[row][col] = '9'
+#
+#     xy_delta = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+#     for xd, yd in xy_delta:
+#         if -1 < row + xd < len(grid) and -1 < col + yd < len(grid[0]) and grid[row + xd][col + yd] == '1':
+#             update_island(grid, row + xd, col + yd)
+
+
 def num_islands(grid):
     count = 0
     for i in range(len(grid)):
