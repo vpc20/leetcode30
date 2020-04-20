@@ -63,7 +63,7 @@ def search(nums, target):
 #         m = (l + r) // 2
 #         if nums[m] == target:
 #             return m
-#         elif nums[m] >= nums[l]:
+#         elif nums[l] <= nums[m]:
 #             if nums[l] <= target < nums[m]:
 #                 r = m - 1
 #             else:
