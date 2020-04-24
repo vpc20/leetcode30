@@ -46,9 +46,15 @@ def insert(curr, v):
 
 def bst_from_preorder(preorder):
     root = TreeNode(preorder[0])
-    for i in range(1, len(preorder)):
-        insert(root, preorder[i])
+    for e in preorder[1:]:
+        insert(root, e)
     return root
+
+# def bst_from_preorder(preorder):
+#     root = TreeNode(preorder[0])
+#     for i in range(1, len(preorder)):
+#         insert(root, preorder[i])
+#     return root
 
 
 preorder = [8, 5, 1, 7, 10, 12]
