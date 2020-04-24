@@ -21,15 +21,15 @@ def subarray_sum_brute(nums, k):
 
 
 def subarray_sum(nums, k):
-    pref_sums = [nums[0]]
-    desired_val = {nums[0]}  # this is a set
+    pref_sum = 0
     ctr = 0
-    for i in range(1, len(nums)):
-        if k - nums[i] in desired_val:
-            ctr += 1
-        pref_sums.append(nums[i] + pref_sums[i - 1])
-    print(pref_sums)
-    print(desired_val)
+    pref_count = defaultdict(int)
+    pref_count[0] = 1
+
+    for num in nums:
+        pref_sum += num
+        ctr += pref_count[pref_sum - k]
+        pref_count[pref_sum] += 1
     return ctr
 
 
@@ -40,7 +40,12 @@ def subarray_sum(nums, k):
 # print(subarray_sum_brute([1, 2, 3, 4, 5, 6, 7], 9))
 # print(subarray_sum_brute([-1, 3, 3, 4, 5, 6, 7], 9))
 
-print(subarray_sum([1, 2, 3, 4, 5, 6, 7], 9))
+# print(subarray_sum_brute([1, 2, 3, 4, 5, 6, 7], 9))
+# print(subarray_sum([1, 2, 3, 4, 5, 6, 7], 9))
+
+# print(subarray_sum_brute([1, 1, 1], 2))
+# print(subarray_sum([1, 1, 1], 2))
+print(subarray_sum([1, -2, 1, -2, 1, -2], 1))
 
 # nums = [-1, 3, 3, 4, 5, 6, 7]
 # for i in range(1, len(nums)):
