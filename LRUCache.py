@@ -55,7 +55,7 @@ class DoublyLinkedList:
 
     def append(self, key, val):
         if self.head is None:  # empty list
-            self.prepend(key, val)
+            return self.prepend(key, val)
         else:
             new_node = Node(key, val)
             new_node.next = None
@@ -70,7 +70,7 @@ class DoublyLinkedList:
         key = node.key
         if node == self.head:  # node.next will be the new head
             self.head = node.next
-            self.head.prev = None
+            # self.head.prev = None
         elif node == self.tail:  # node.prev will be the new tail
             self.tail = node.prev
             self.tail.next = None
@@ -79,6 +79,13 @@ class DoublyLinkedList:
             node.next.prev = node.prev
         del node
         return key
+
+    def display_forward(self):
+        curr = self.head
+        while curr:
+            print(f'({curr.key}, {curr.val})', end=' ')
+            curr = curr.next
+        print('')
 
 
 class LRUCache:
@@ -89,9 +96,13 @@ class LRUCache:
         self.key_nodes = defaultdict(Node)
 
     def get(self, key):
+        if key not in self.key_nodes:
+            return -1
         node = self.key_nodes[key]
         key = node.key
         val = node.val
+        if self.size == 1:
+            return val
 
         delkey = self.dll.delete(node)
         del self.key_nodes[key]
@@ -102,15 +113,66 @@ class LRUCache:
         return val
 
     def put(self, key, value):
+        if key in self.key_nodes:
+            node = self.key_nodes[key]
+            node.val = value
+            self.get(key)
+            return
+
         if self.size == self.capacity:
-            delkey = self.dll.delete(self.dll.head)
+            delkey = self.dll.delete(self.dll.head)  # head is least recently used
             del self.key_nodes[delkey]
         else:
             self.size += 1
-        node = self.dll.append(key, value)
+        node = self.dll.append(key, value)  # tail is most recently used
         self.key_nodes[key] = node
 
-# Your LRUCache object will be instantiated and called as such:
-# obj = LRUCache(capacity)
-# param_1 = obj.get(key)
-# obj.put(key,value)
+    def display(self):
+        self.dll.display_forward()
+
+
+# from collections import OrderedDict
+#
+# class LRUCache(OrderedDict):
+#
+#     def __init__(self, capacity):
+#         self.capacity = capacity
+#
+#     def get(self, key):
+#         if key not in self:
+#             return - 1
+#
+#         self.move_to_end(key)
+#         return self[key]
+#
+#     def put(self, key, value):
+#         if key in self:
+#             self.move_to_end(key)
+#         self[key] = value
+#         if len(self) > self.capacity:
+#             self.popitem(last=False)
+
+# lru_cache = LRUCache(2)
+# lru_cache.put(1, 1)
+# lru_cache.put(2, 2)
+# print(lru_cache.get(1))
+# lru_cache.put(3, 3)
+# print(lru_cache.get(2))
+# lru_cache.put(4, 4)
+# print(lru_cache.get(1))
+# print(lru_cache.get(3))
+# print(lru_cache.get(4))
+
+# lru_cache = LRUCache(1)
+# lru_cache.put(2, 1)
+# print(lru_cache.get(2))
+
+lru_cache = LRUCache(2)
+lru_cache.put(2, 1)
+lru_cache.put(2, 2)
+print(lru_cache.get(2))
+lru_cache.put(1, 1)
+lru_cache.put(4, 1)
+print(lru_cache.get(2))
+
+lru_cache.display()
