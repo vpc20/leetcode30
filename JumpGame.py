@@ -25,25 +25,6 @@
 #             return False
 #         i += nums[i]
 
-def can_jump_aux(nums, i):
-    last_index = len(nums) - 1
-    for k in range(i, i + nums[0]):
-        while True:
-            if k >= last_index:
-                return True
-            if nums[k] == 0:
-                return False
-            can_jump_aux(nums, k + nums[k])
-
-
-def can_jump(nums):
-    # x = nums[0]
-    # for i in range(x + 1):
-    #     if can_jump_aux(nums[i:], 0):
-    #         return True
-    # return False
-    return can_jump_aux(nums, 0)
-
 
 # dynamic programming solution, O(n^2) time complexity
 def can_jump_dyna(nums):
@@ -58,6 +39,36 @@ def can_jump_dyna(nums):
     return dp[-1]
 
 
+# dynamic programming solution, O(n^2) time complexity
+def can_jump_dyna1(nums):
+    dp = [True] + [False] * (len(nums) - 1)
+    for i in range(len(nums)):
+        if dp[i]:
+            for j in range(i, i + nums[i] + 1):
+                if j < len(nums):
+                    dp[j] = True
+    return dp[-1]
+
+
+# greedy solution, O(n) time complexity
+def can_jump(nums):
+    lasti = len(nums) - 1
+    for i in range(len(nums) - 2, -1, -1):
+        if i + nums[i] >= lasti:
+            lasti = i
+    return lasti == 0
+
+
+# def can_jump(nums):
+#     len1 = len(nums)
+#     nexti = 0
+#     for i in range(len1):
+#         if i + nums[i] >= len1 - 1:
+#             return True
+#         nexti = i + nums[i]
+#     return False
+
+
 def canJump(nums):
     n = len(nums)
     if n <= 1:
@@ -69,26 +80,29 @@ def canJump(nums):
     return dp[n - 1]
 
 
-arr = [2, 3, 1, 1, 4]
-print(can_jump_dyna(arr))
-print(canJump(arr))
-
-arr = [3, 2, 1, 0, 4]
-print(can_jump_dyna(arr))
-print(canJump(arr))
-
-arr = [2, 0]
-print(can_jump_dyna(arr))
-print(canJump(arr))
-
-arr = [2, 5, 0, 0]
-print(can_jump_dyna(arr))
-print(canJump(arr))
-
-arr = [1, 1, 2, 2, 0, 1, 1]
-print(can_jump_dyna(arr))
-print(canJump(arr))
+# arr = [2, 3, 1, 1, 4]
+# print(can_jump_dyna(arr))
+# print(canJump(arr))
+#
+# arr = [3, 2, 1, 0, 4]
+# print(can_jump_dyna(arr))
+# print(canJump(arr))
+#
+# arr = [2, 0]
+# print(can_jump_dyna(arr))
+# print(canJump(arr))
+#
+# arr = [2, 5, 0, 0]
+# print(can_jump_dyna(arr))
+# print(canJump(arr))
+#
+# arr = [1, 1, 2, 2, 0, 1, 1]
+# print(can_jump_dyna(arr))
+# print(canJump(arr))
 
 print('-----')
-arr = [1, 1, 1, 1]
-print(can_jump_dyna(arr))
+arr = [2, 3, 1, 1, 4]
+# arr = [0, 2]
+# arr = [2, 0]
+# arr = [2, 5, 0, 0]
+print(can_jump_dyna1(arr))
