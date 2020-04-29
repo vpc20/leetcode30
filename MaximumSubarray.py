@@ -27,17 +27,28 @@ def max_subarr_sum(arr):
     return maxsum
 
 
-def max_subarr_sum_pref(arr):  # solution using prefix sum
+# def max_subarr_sum_pref(arr):  # solution using prefix sum
+#     if not arr:
+#         return 0
+#     for i in range(1, len(arr)):  # convert arr to prefix sum array
+#         arr[i] += arr[i - 1]
+#
+#     min_pref_sum = 0
+#     maxsum = -sys.maxsize
+#     for j in range(len(arr)):
+#         maxsum = max(maxsum, arr[j] - min_pref_sum)
+#         min_pref_sum = min(min_pref_sum, arr[j])
+#     return maxsum
+
+
+def max_subarr_sum_pref(arr):  # solution using prefix sum, more compact solution
     if not arr:
         return 0
-    for i in range(1, len(arr)):  # convert arr to prefix sum array
-        arr[i] += arr[i - 1]
-
-    min_pref_sum = 0
-    maxsum = -sys.maxsize
-    for j in range(len(arr)):
-        maxsum = max(maxsum, arr[j] - min_pref_sum)
-        min_pref_sum = min(min_pref_sum, arr[j])
+    prefsum, maxsum, min_prefsum = 0, -sys.maxsize, 0
+    for num in arr:
+        prefsum += num
+        maxsum = max(maxsum, prefsum - min_prefsum)
+        min_prefsum = min(min_prefsum, prefsum)
     return maxsum
 
 
@@ -48,4 +59,7 @@ def max_subarr_sum_brute(arr):
 print(max_subarr_sum([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
 print(max_subarr_sum_brute([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
 print(max_subarr_sum_pref([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+
+print(max_subarr_sum_pref([1, 2]))
+print(max_subarr_sum_pref([-2, 1]))
 # print(max_subarr_sum([-2, 1, -3, 4]))
