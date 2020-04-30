@@ -69,15 +69,15 @@ def can_jump(nums):
 #     return False
 
 
-def canJump(nums):
-    n = len(nums)
-    if n <= 1:
-        return True
-
-    dp = [True] + [False] * (n - 1)
-    for i in range(1, n):
-        dp[i] = any(nums[j] >= (i - j) for j in range(i) if dp[j])
-    return dp[n - 1]
+# def canJump(nums):
+#     n = len(nums)
+#     if n <= 1:
+#         return True
+#
+#     dp = [True] + [False] * (n - 1)
+#     for i in range(1, n):
+#         dp[i] = any(nums[j] >= (i - j) for j in range(i) if dp[j])
+#     return dp[n - 1]
 
 
 # arr = [2, 3, 1, 1, 4]

@@ -11,5 +11,5 @@ class Test(TestCase):
             if arr:
                 # print(arr)
                 # print(can_jump(arr))
-                # self.assertEqual(can_jump(arr), can_jump_dyna(arr))
+                self.assertEqual(can_jump(arr), can_jump_dyna(arr))
                 self.assertEqual(can_jump(arr), can_jump_dyna1(arr))

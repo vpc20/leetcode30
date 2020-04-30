@@ -69,7 +69,7 @@ class FirstUnique:
         self.all_ctr = Counter(nums)
         self.unique_ctr = {k: v for k, v in Counter(nums).items() if v == 1}
 
-    def showFirstUnique(self):
+    def show_first_unique(self):
         return next(iter(self.unique_ctr)) if self.unique_ctr else -1
 
     def add(self, value):
@@ -96,10 +96,10 @@ class FirstUnique:
 #   firstUnique.add(3);            // the queue is now [2,3,5,5,2,3]
 #   firstUnique.showFirstUnique(); // return -1
 f = FirstUnique([2, 3, 5])
-print(f.showFirstUnique())
+print(f.show_first_unique())
 f.add(5)
-print(f.showFirstUnique())
+print(f.show_first_unique())
 f.add(2)
-print(f.showFirstUnique())
+print(f.show_first_unique())
 f.add(3)
-print(f.showFirstUnique())
+print(f.show_first_unique())

@@ -129,7 +129,7 @@
 #
 #     def display(self):
 #         self.dll.display_forward()
-from collections import deque, defaultdict
+from collections import OrderedDict
 
 
 class Node:
@@ -138,50 +138,26 @@ class Node:
         self.val = val
 
 
-class LRUCache:
+class LRUCache(OrderedDict):
+
     def __init__(self, capacity):
+        super().__init__()
         self.capacity = capacity
-        self.dq = deque()
-        self.keys = defaultdict(Node)
 
     def get(self, key):
-        pass
+        if key not in self:
+            return - 1
+
+        self.move_to_end(key)
+        return self[key]
 
     def put(self, key, value):
-        if key in self.keys:
-            node = self.keys[key]
-            node, v = self.dq.pop(i)
-            self.keys[key] = node
-            self.dq.append((node, value))
+        if key in self:
+            self.move_to_end(key)
+        self[key] = value
+        if len(self) > self.capacity:
+            self.popitem(last=False)
 
-        if len(self.dq) == self.capacity:
-            node, v = self.dq.popleft()
-            del self.keys[node.key]
-        node = Node(key, value)
-        self.keys[key] = node
-        self.dq.append((node, value))
-
-
-# from collections import OrderedDict
-#
-# class LRUCache(OrderedDict):
-#
-#     def __init__(self, capacity):
-#         self.capacity = capacity
-#
-#     def get(self, key):
-#         if key not in self:
-#             return - 1
-#
-#         self.move_to_end(key)
-#         return self[key]
-#
-#     def put(self, key, value):
-#         if key in self:
-#             self.move_to_end(key)
-#         self[key] = value
-#         if len(self) > self.capacity:
-#             self.popitem(last=False)
 
 # lru_cache = LRUCache(2)
 # lru_cache.put(1, 1)
@@ -202,9 +178,9 @@ class LRUCache:
 lru_cache = LRUCache(2)
 lru_cache.put(2, 1)
 lru_cache.put(2, 2)
-# print(lru_cache.get(2))
-# lru_cache.put(1, 1)
-# lru_cache.put(4, 1)
-# print(lru_cache.get(2))
+print(lru_cache.get(2))
+lru_cache.put(1, 1)
+lru_cache.put(4, 1)
+print(lru_cache.get(2))
 #
 # lru_cache.display()
