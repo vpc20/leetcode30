@@ -26,59 +26,76 @@
 
 
 class TreeNode:
+
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
 
-    @staticmethod
-    def height(node):
-        """
-        The height of a node in a tree is the number of edges on the longest simple
-        downward path from the node to a leaf. The height of a tree is the height of its root.
 
-        :param node: node of the tree
-        :return: height of the node
-        """
+def diameter(node):
+    """
+    The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
+    This path may or may not pass through the root.
 
-        def height_aux(curr, height):
-            nonlocal max_height
-            max_height = max(max_height, height)
-            if curr.left:
-                height_aux(curr.left, height + 1)
-            if curr.right:
-                height_aux(curr.right, height + 1)
+    :param node: node of the tree
+    :return: diameter of the tree
+    """
 
-        max_height = 0
-        height_aux(node, 0)
-        return max_height
-
-    def diameter(self, node):
-        def traverse(curr):
-            hleft = 0
-            hright = 0
-            if curr.left:
-                hleft = self.height(curr.left) + 1
-                traverse(curr.left)
-            if curr.right:
-                hright = self.height(curr.right) + 1
-                traverse(curr.right)
-            harr.append(hleft + hright)
-
-        if node is None:
+    def dfs(curr):
+        nonlocal maxval
+        if curr.left is None and curr.right is None:
             return 0
-        harr = []
-        traverse(node)
-        return max(harr)
-
-    def heightx(self, node):
         left = 0
         right = 0
-        if node.left:
-            left = 1 + self.heightx(node.left)
-        if node.right:
-            right = 1 + self.heightx(node.right)
+        if curr.left:
+            left = 1 + dfs(curr.left)
+        if curr.right:
+            right = 1 + dfs(curr.right)
+        maxval = max(maxval, left + right)
         return max(left, right)
+
+    if node is None:
+        return 0
+    maxval = 0
+    dfs(node)
+    return maxval
+
+
+# def diameter(node):
+#     def traverse(curr):
+#         hleft = 0
+#         hright = 0
+#         if curr.left:
+#             hleft = height(curr.left) + 1
+#             traverse(curr.left)
+#         if curr.right:
+#             hright = height(curr.right) + 1
+#             traverse(curr.right)
+#         harr.append(hleft + hright)
+#
+#     if node is None:
+#         return 0
+#     harr = []
+#     traverse(node)
+#     return max(harr)
+
+
+def height(node):
+    """
+    The height of a node in a tree is the number of edges on the longest simple
+    downward path from the node to a leaf. The height of a tree is the height of its root.
+
+    :param node: node of the tree
+    :return: height of the node
+    """
+    left = 0
+    right = 0
+    if node.left:
+        left = 1 + height(node.left)
+    if node.right:
+        right = 1 + height(node.right)
+    return max(left, right)
 
 
 # def diameterOfBinaryTree(self, root):
@@ -101,16 +118,24 @@ if __name__ == '__main__':
     node4 = TreeNode(4)
     node5 = TreeNode(5)
 
+    assert diameter(node1) == 0
+
     node1.left = node2
+    assert diameter(node1) == 1
+
     node1.right = node3
+    print(diameter(node1))
+    assert diameter(node1) == 2
 
     node2.left = node4
+    assert diameter(node1) == 3
+
     node2.right = node5
+    print(diameter(node1))
+    assert diameter(node1) == 3
 
-    # print(node1.diameter(node1))
-
-    print(node1.heightx(node1))
-    print(node1.heightx(node2))
-    print(node1.heightx(node3))
-    print(node1.heightx(node4))
-    print(node1.heightx(node5))
+    # print(height(node1))
+    # print(height(node2))
+    # print(height(node3))
+    # print(height(node4))
+    # print(height(node5))
