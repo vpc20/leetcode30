@@ -17,20 +17,20 @@
 # Note:
 # The number of nodes in the given list will be between 1 and 100.
 
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 
-def middle_node(head):
-    curr = head
-    arr = []
-    while curr:
-        arr.append(curr)
-        curr = curr.next
-    return arr[int(len(arr) / 2)]
+# def middle_node(head):
+#     curr = head
+#     arr = []
+#     while curr:
+#         arr.append(curr)
+#         curr = curr.next
+#     return arr[int(len(arr) / 2)]
 
 # def middle_node(self, head: ListNode) -> ListNode:
 #     mid = head
@@ -43,15 +43,29 @@ def middle_node(head):
 #         mid = mid.next
 #     return mid
 
-# def middleNode(self, head):
-#     slow = fast = head
-#     while fast and fast.next:
-#         slow = slow.next
-#         fast = fast.next.next
-#     return slow
+def middle_node(head):
+    mid = tail = head
+    while tail and tail.next:
+        mid = mid.next
+        tail = tail.next.next
+    return mid
+
 
 # def middleNode(self, head):
 #     A = [head]
 #     while A[-1].next:
 #         A.append(A[-1].next)
 #     return A[len(A) / 2]
+
+
+node1 = ListNode(1)
+head = node1
+assert middle_node(head) == node1
+
+node2 = ListNode(2)
+node1.next = node2
+assert middle_node(head) == node2
+
+node3 = ListNode(3)
+node2.next = node3
+assert middle_node(head) == node2
