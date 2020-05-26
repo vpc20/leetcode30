@@ -41,21 +41,21 @@ def find_max_len_brute(nums):
 #     }
 # }
 
-def find_max_len(nums):
-    pos = 0
-    ypos_arr = [0]
-    for i in range(len(nums)):
-        pos += (1 if nums[i] == 1 else -1)
-        ypos_arr.append(pos)
-
-    d = {}
-    maxlen = 0
-    for i, num in enumerate(ypos_arr):
-        if num in d:
-            maxlen = max(maxlen, i - d[num])
-        else:
-            d[num] = i
-    return maxlen
+# def find_max_len(nums):
+#     pos = 0
+#     ypos_arr = [0]
+#     for i in range(len(nums)):
+#         pos += (1 if nums[i] == 1 else -1)
+#         ypos_arr.append(pos)
+#
+#     d = {}
+#     maxlen = 0
+#     for i, num in enumerate(ypos_arr):
+#         if num in d:
+#             maxlen = max(maxlen, i - d[num])
+#         else:
+#             d[num] = i
+#     return maxlen
 
 # this is the compact version of code above
 # def find_max_len(nums):
@@ -69,6 +69,19 @@ def find_max_len(nums):
 #         else:
 #             hashmap[count] = i
 #     return maxlen
+
+# this is the another compact version of code above
+def find_max_len(nums):
+    pos = maxlen = 0
+    d = {0: 0}
+    for i, num in enumerate(nums):
+        pos += (1 if num == 1 else -1)
+        if pos in d:
+            maxlen = max(maxlen, i + 1 - d[pos])
+        else:
+            d[pos] = i + 1
+    return maxlen
+
 
 # nums = [1, 1, 1, 0, 1, 0, 1, 1]
 # nums = [1, 0, 1, 1, 1, 0, 1, 1]
