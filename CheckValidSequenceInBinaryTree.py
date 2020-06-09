@@ -61,6 +61,22 @@ def is_valid_sequence(root, arr):
     return dfs(root, [root.val])
 
 
+# def is_valid_sequence(root, arr):
+#     def dfs(curr, seq):
+#         if curr.left is None and curr.right is None:  # is a leaf
+#             if seq == arr:
+#                 return True
+#         if curr.left:
+#             if dfs(curr.left, seq + [curr.left.val]):
+#                 return True
+#         if curr.right:
+#             if dfs(curr.right, seq + [curr.right.val]):
+#                 return True
+#         return False
+#
+#     return dfs(root, [root.val])
+
+
 tree_arr = [0, 1, 0, 0, 1, 0, None, None, 1, 0, 0]
 # tree_arr = [0, 1, 0]
 nodes = [TreeNode(v) if v is not None else None for v in tree_arr]
@@ -80,9 +96,9 @@ arr = [0, 1, 0, 1]
 # arr = [1]
 # arr = [0, 0]
 # print(is_valid_sequence(root, arr))
-assert is_valid_sequence(root, [0, 1, 0, 1]) == True
-assert is_valid_sequence(root, [0, 1, 1, 0]) == True
-assert is_valid_sequence(root, [0, 0, 0]) == True
-assert is_valid_sequence(root, [0]) == False
-assert is_valid_sequence(root, [1]) == False
-assert is_valid_sequence(root, [0, 1, 1, 1]) == False
+assert is_valid_sequence(root, [0, 1, 0, 1]) is True
+assert is_valid_sequence(root, [0, 1, 1, 0]) is True
+assert is_valid_sequence(root, [0, 0, 0]) is True
+assert is_valid_sequence(root, [0]) is False
+assert is_valid_sequence(root, [1]) is False
+assert is_valid_sequence(root, [0, 1, 1, 1]) is False
