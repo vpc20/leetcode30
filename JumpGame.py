@@ -15,32 +15,40 @@
 #
 
 
-# def can_jump_aux(nums):
-#     i = 0
-#     last_index = len(nums) - 1
-#     while True:
-#         if i >= last_index:
-#             return True
-#         if nums[i] == 0:
-#             return False
-#         i += nums[i]
+# recursive solution
+# def can_jump_recur(nums):
+#     def can_jump(nums):
+#         n = len(nums)
+#         for i in range(n):
+#             if i != 0:
+#                 for j in range(i + 1, i + nums[i] + 1):
+#                     if j == n - 1:
+#                         return True
+#                     if can_jump(nums[j:]):
+#                         return True
+#         return False
+#
+#     if len(nums) < 2:
+#         return True
+#     if nums[0] == 0:
+#         return False
+#     return can_jump(nums)
 
 
-# dynamic programming solution, O(n^2) time complexity
+# recursive solution, time limit exceeded
+def can_jump_recur(nums):
+    if len(nums) == 1:
+        return True
+    for i in range(len(nums) - 2, -1, -1):
+        for j in range(i, i + nums[i] + 1):
+            if j == len(nums) - 1:
+                if can_jump_recur(nums[:i + 1]):
+                    return True
+    return False
+
+
+# dynamic programming solution, O(n^2) time complexity , time limit exceeded
 def can_jump_dyna(nums):
-    dp = [True] + [False] * (len(nums) - 1)
-    for i in range(1, len(nums)):
-        for j in range(i):
-            if dp[j] and j + nums[j] >= i:
-                dp[i] = True
-                break
-        else:
-            dp[i] = False
-    return dp[-1]
-
-
-# dynamic programming solution, O(n^2) time complexity
-def can_jump_dyna1(nums):
     dp = [True] + [False] * (len(nums) - 1)
     for i in range(len(nums)):
         if dp[i]:
@@ -50,7 +58,7 @@ def can_jump_dyna1(nums):
     return dp[-1]
 
 
-# greedy solution, O(n) time complexity
+# O(n) time complexity
 def can_jump(nums):
     lasti = len(nums) - 1
     for i in range(len(nums) - 2, -1, -1):
@@ -59,50 +67,17 @@ def can_jump(nums):
     return lasti == 0
 
 
-# def can_jump(nums):
-#     len1 = len(nums)
-#     nexti = 0
-#     for i in range(len1):
-#         if i + nums[i] >= len1 - 1:
-#             return True
-#         nexti = i + nums[i]
-#     return False
+assert can_jump_recur([2, 3, 1, 1, 4]) is True
+assert can_jump_dyna([2, 3, 1, 1, 4]) is True
 
+assert can_jump_recur([3, 2, 1, 0, 4]) is False
+assert can_jump_dyna([3, 2, 1, 0, 4]) is False
 
-# def canJump(nums):
-#     n = len(nums)
-#     if n <= 1:
-#         return True
-#
-#     dp = [True] + [False] * (n - 1)
-#     for i in range(1, n):
-#         dp[i] = any(nums[j] >= (i - j) for j in range(i) if dp[j])
-#     return dp[n - 1]
+assert can_jump_recur([1]) is True
+assert can_jump_dyna([1]) is True
 
+assert can_jump_recur([0, 2, 3]) is False
+assert can_jump_dyna([0, 2, 3]) is False
 
-# arr = [2, 3, 1, 1, 4]
-# print(can_jump_dyna(arr))
-# print(canJump(arr))
-#
-# arr = [3, 2, 1, 0, 4]
-# print(can_jump_dyna(arr))
-# print(canJump(arr))
-#
-# arr = [2, 0]
-# print(can_jump_dyna(arr))
-# print(canJump(arr))
-#
-# arr = [2, 5, 0, 0]
-# print(can_jump_dyna(arr))
-# print(canJump(arr))
-#
-# arr = [1, 1, 2, 2, 0, 1, 1]
-# print(can_jump_dyna(arr))
-# print(canJump(arr))
-
-print('-----')
-arr = [2, 3, 1, 1, 4]
-# arr = [0, 2]
-# arr = [2, 0]
-# arr = [2, 5, 0, 0]
-print(can_jump_dyna1(arr))
+assert can_jump_recur([1, 0, 1, 0]) is False
+assert can_jump_dyna([1, 0, 1, 0]) is False
